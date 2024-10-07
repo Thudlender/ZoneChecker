@@ -1,0 +1,314 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": [
+    {
+      "id": "18574",
+      "lat": 13.84400609,
+      "lng": 100.04224151,
+      "code": "18574",
+      "name": "ชุมชนนาสร้าง (นครปฐม)",
+      "address": "ต.นครปฐม อ.เมืองนครปฐม นครปฐม",
+      "subdistrict": "นครปฐม",
+      "district": "เมืองนครปฐม",
+      "province": "นครปฐม",
+      "postcode": "73000",
+      "products": [
+        {
+          "id": 13,
+          "code": "VF",
+          "name": "ผักและผลไม้สด",
+          "image": "/static/imgs/components/google-map/icons/vf.svg",
+          "logo": "/static/imgs/components/google-map/logos/vf.svg"
+        },
+        {
+          "id": 6,
+          "code": "AC",
+          "name": "ออลล์คาเฟ่",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-06.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-06.png"
+        },
+        {
+          "id": 2,
+          "code": "KS",
+          "name": "คัดสรร",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-03.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-03.png"
+        }
+      ],
+      "lineOA": "",
+      "tel": "091-001-8574",
+      "renovate": false,
+      "direction": "https://www.google.com/maps/search/?api=1&query=13.84400609,100.04224151"
+    },
+    {
+      "id": "18904",
+      "lat": 13.83440647,
+      "lng": 100.03382206,
+      "code": "18904",
+      "name": "ถนนมาลัยแมน กม.3",
+      "address": "ต.นครปฐม อ.เมืองนครปฐม นครปฐม",
+      "subdistrict": "นครปฐม",
+      "district": "เมืองนครปฐม",
+      "province": "นครปฐม",
+      "postcode": "73000",
+      "products": [
+        {
+          "id": 13,
+          "code": "VF",
+          "name": "ผักและผลไม้สด",
+          "image": "/static/imgs/components/google-map/icons/vf.svg",
+          "logo": "/static/imgs/components/google-map/logos/vf.svg"
+        },
+        {
+          "id": 6,
+          "code": "AC",
+          "name": "ออลล์คาเฟ่",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-06.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-06.png"
+        },
+        {
+          "id": 2,
+          "code": "KS",
+          "name": "คัดสรร",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-03.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-03.png"
+        }
+      ],
+      "lineOA": "",
+      "tel": "091-001-8904",
+      "renovate": false,
+      "direction": "https://www.google.com/maps/search/?api=1&query=13.83440647,100.03382206"
+    },
+    {
+      "id": "02340",
+      "lat": 13.82811858,
+      "lng": 100.05250088,
+      "code": "02340",
+      "name": "ประปานคร",
+      "address": "ถ.นาสร้าง ต.นครปฐม อ.เมืองนครปฐม นครปฐม",
+      "subdistrict": "นครปฐม",
+      "district": "เมืองนครปฐม",
+      "province": "นครปฐม",
+      "postcode": "73000",
+      "products": [
+        {
+          "id": 13,
+          "code": "VF",
+          "name": "ผักและผลไม้สด",
+          "image": "/static/imgs/components/google-map/icons/vf.svg",
+          "logo": "/static/imgs/components/google-map/logos/vf.svg"
+        },
+        {
+          "id": 14,
+          "code": "FP",
+          "name": "ฟู้ดเพลส",
+          "image": "/static/imgs/components/google-map/icons/fp.svg",
+          "logo": "/static/imgs/components/google-map/logos/fp.svg"
+        },
+        {
+          "id": 6,
+          "code": "AC",
+          "name": "ออลล์คาเฟ่",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-06.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-06.png"
+        },
+        {
+          "id": 4,
+          "code": "GP",
+          "name": "กัฟ",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-04.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-04.png"
+        },
+        {
+          "id": 2,
+          "code": "KS",
+          "name": "คัดสรร",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-03.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-03.png"
+        }
+      ],
+      "lineOA": "",
+      "tel": "034-215-161-2,091-002-2340",
+      "renovate": false,
+      "direction": "https://www.google.com/maps/search/?api=1&query=13.82811858,100.05250088"
+    },
+    {
+      "id": "01838",
+      "lat": 13.83711742,
+      "lng": 100.03136741,
+      "code": "01838",
+      "name": "ปิ่นเกลียว",
+      "address": "ต.นครปฐม อ.เมืองนครปฐม นครปฐม",
+      "subdistrict": "นครปฐม",
+      "district": "เมืองนครปฐม",
+      "province": "นครปฐม",
+      "postcode": "73000",
+      "products": [
+        {
+          "id": 13,
+          "code": "VF",
+          "name": "ผักและผลไม้สด",
+          "image": "/static/imgs/components/google-map/icons/vf.svg",
+          "logo": "/static/imgs/components/google-map/logos/vf.svg"
+        },
+        {
+          "id": 6,
+          "code": "AC",
+          "name": "ออลล์คาเฟ่",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-06.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-06.png"
+        },
+        {
+          "id": 5,
+          "code": "SP",
+          "name": "สเลอปี้",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-05.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-05.png"
+        },
+        {
+          "id": 4,
+          "code": "GP",
+          "name": "กัฟ",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-04.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-04.png"
+        },
+        {
+          "id": 2,
+          "code": "KS",
+          "name": "คัดสรร",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-03.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-03.png"
+        }
+      ],
+      "lineOA": "@486mqqrm",
+      "tel": "034-285-785-6,091-002-1838",
+      "renovate": false,
+      "direction": "https://www.google.com/maps/search/?api=1&query=13.83711742,100.03136741"
+    },
+    {
+      "id": "09856",
+      "lat": 13.83687318,
+      "lng": 100.030047,
+      "code": "09856",
+      "name": "ม.ราชภัฏนครปฐม",
+      "address": "ต.นครปฐม อ.เมืองนครปฐม นครปฐม",
+      "subdistrict": "นครปฐม",
+      "district": "เมืองนครปฐม",
+      "province": "นครปฐม",
+      "postcode": "73000",
+      "products": [
+        {
+          "id": 13,
+          "code": "VF",
+          "name": "ผักและผลไม้สด",
+          "image": "/static/imgs/components/google-map/icons/vf.svg",
+          "logo": "/static/imgs/components/google-map/logos/vf.svg"
+        },
+        {
+          "id": 14,
+          "code": "FP",
+          "name": "ฟู้ดเพลส",
+          "image": "/static/imgs/components/google-map/icons/fp.svg",
+          "logo": "/static/imgs/components/google-map/logos/fp.svg"
+        },
+        {
+          "id": 6,
+          "code": "AC",
+          "name": "ออลล์คาเฟ่",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-06.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-06.png"
+        },
+        {
+          "id": 2,
+          "code": "KS",
+          "name": "คัดสรร",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-03.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-03.png"
+        }
+      ],
+      "lineOA": "@044lqkvl",
+      "tel": "091-002-9856",
+      "renovate": false,
+      "direction": "https://www.google.com/maps/search/?api=1&query=13.83687318,100.030047"
+    },
+    {
+      "id": "10502",
+      "lat": 13.83231804,
+      "lng": 100.04105221,
+      "code": "10502",
+      "name": "ไรรดา(นครปฐม)",
+      "address": "ต.นครปฐม อ.เมืองนครปฐม นครปฐม",
+      "subdistrict": "นครปฐม",
+      "district": "เมืองนครปฐม",
+      "province": "นครปฐม",
+      "postcode": "73000",
+      "products": [
+        {
+          "id": 13,
+          "code": "VF",
+          "name": "ผักและผลไม้สด",
+          "image": "/static/imgs/components/google-map/icons/vf.svg",
+          "logo": "/static/imgs/components/google-map/logos/vf.svg"
+        },
+        {
+          "id": 6,
+          "code": "AC",
+          "name": "ออลล์คาเฟ่",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-06.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-06.png"
+        },
+        {
+          "id": 5,
+          "code": "SP",
+          "name": "สเลอปี้",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-05.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-05.png"
+        },
+        {
+          "id": 2,
+          "code": "KS",
+          "name": "คัดสรร",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-03.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-03.png"
+        }
+      ],
+      "lineOA": "",
+      "tel": "091-001-0502",
+      "renovate": false,
+      "direction": "https://www.google.com/maps/search/?api=1&query=13.83231804,100.04105221"
+    },
+    {
+      "id": "18438",
+      "lat": 13.84158669,
+      "lng": 100.03506929,
+      "code": "18438",
+      "name": "สามแยกปิ่นเกลียว (นครปฐม)",
+      "address": "ต.นครปฐม อ.เมืองนครปฐม นครปฐม",
+      "subdistrict": "นครปฐม",
+      "district": "เมืองนครปฐม",
+      "province": "นครปฐม",
+      "postcode": "73000",
+      "products": [
+        {
+          "id": 13,
+          "code": "VF",
+          "name": "ผักและผลไม้สด",
+          "image": "/static/imgs/components/google-map/icons/vf.svg",
+          "logo": "/static/imgs/components/google-map/logos/vf.svg"
+        },
+        {
+          "id": 2,
+          "code": "KS",
+          "name": "คัดสรร",
+          "image": "/static/imgs/components/google-map/icons/ic_7-11-03.png",
+          "logo": "/static/imgs/components/google-map/logos/ic_7-11-03.png"
+        }
+      ],
+      "lineOA": "",
+      "tel": "091-001-8438",
+      "renovate": false,
+      "direction": "https://www.google.com/maps/search/?api=1&query=13.84158669,100.03506929"
+    }
+  ]
+}
