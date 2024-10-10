@@ -1,14 +1,20 @@
 import axios from "axios"; //
 import { useEffect, useState } from "react"; //
 const url = import.meta.env.VITE_URL; //
-import {MapContainer,TileLayer,Popup,Marker} from "react-leaflet"; //
+import {
+  MapContainer,
+  TileLayer,
+  Popup,
+  Marker,
+  useMapEvents,
+} from "react-leaflet"; //
 import "leaflet/dist/leaflet.css"; //
 import { icon, Icon } from "leaflet";
-//import "./App.css";
+import "./App.css";
 import Swal from "sweetalert2";
 
 function App() {
-  const center = [13.838492331040143, 100.02533605919358];
+  const center = [13.838492331040143, 100.02533605919358]; //NPRU
   const [stores, setStores] = useState([]);
   const [myLocation, setMyLocation] = useState({ lat: "", lng: "" });
   const [deliveryZone, setDeliveryZone] = useState({
@@ -52,7 +58,7 @@ function App() {
   useEffect(() => {
     const fetchStore = async () => {
       try {
-        const response = await axios.get(base_url + "/api/stores");
+        const response = await axios.get(url + "/api/stores");
         console.log(response.data);
         if (response.status === 200) {
           setStores(response.data);
@@ -86,7 +92,7 @@ function App() {
     navigator.geolocation.getCurrentPosition((position) => {
       setMyLocation({
         lat: position.coords.latitude,
-        lng: position.coords.longtitude,
+        lng: position.coords.longitude,
       });
     });
   };
@@ -154,7 +160,7 @@ function App() {
             {stores &&
               stores.map((store) => {
                 return (
-                  <Marker position={[store.lat, store.lng]}>
+                  <Marker key={store.id} position={[store.lat, store.lng]}>
                     <Popup>
                       <b>{store.name}</b>
                       <p>{store.address}</p>
@@ -163,6 +169,7 @@ function App() {
                   </Marker>
                 );
               })}
+              <LocationMap/>
           </MapContainer>
         </div>
       </div>
