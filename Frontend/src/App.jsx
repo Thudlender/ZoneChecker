@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import axios from "axios";
+//import { useEffect, useState } from "react";
+//import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
+//import "leaflet/dist/leaflet.css";
+//import axios from "axios";
 import "./App.css";
 import { icon, Icon } from "leaflet";
 import Swal from "sweetalert2";
-const base_url = import.meta.env.VITE_API_BASE_URL;
+//const base_url = import.meta.env.VITE_API_BASE_URL;
+
 function App() {
   const center = [13.838492331040143, 100.02533605919358]; //SE NPRU
   const [stores, setStores] = useState([]);
@@ -15,6 +16,22 @@ function App() {
     lng: 100.04233271,
     radius: 1000,
   });
+   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url + "/api/stores");
+        console.log(response.data);
+
+        if (response.status === 200) {
+          setStores(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   // function to calculate distance between 2 points using haversine formula
     const calculateDistance = (lat1, lng1, lat2, lng2) => {
       const R = 6371e3; //Eath radius in meters
