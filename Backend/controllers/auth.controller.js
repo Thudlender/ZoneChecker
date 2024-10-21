@@ -1,11 +1,17 @@
-
+const config = require("../config/auth.consfig");
+const db = require("../models");
+const User = db.User;
+const Role = db.Role;
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const { Op } = require("sequelize");
 
 //Register a new user
 exports.signup = async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
-    res.status(400).send({
-      message: "Please provide all required fields",
+    req.status(400).send({
+      message: "Please provid all required fields",
     });
     return;
   }
@@ -14,7 +20,7 @@ exports.signup = async (req, res) => {
   const newUser = {
     username: username,
     email: email,
-    UserPassword: bcrypt.hashSync(password, 11),
+    password: bcrypt.hashSync(password, 8),
   };
 
   //Save user in the database
@@ -28,18 +34,18 @@ exports.signup = async (req, res) => {
         }).then((roles) => {
           user.setRoles(roles).then(() => {
             res.send({
-              message: "User register successfully!",
+              message: "User registered successfully!",
             });
           });
         });
       } else {
-        //set default role to "user" id=1
+        //set defautl role to "user" id=1
         user.setRoles([1]).then(() => {
           res.send({
-            message: "User register successfully!",
+            message: "User registered successfully!",
           });
         });
-      }
+      };
     })
     .catch((error) => {
       res.status(500).send({
@@ -52,7 +58,6 @@ exports.signup = async (req, res) => {
 
 //Signin
 exports.signin = async (req, res) => {
-  //TODO
   const { username, password } = req.body;
   if (!username || !password) {
     res.status(400).send({
@@ -60,7 +65,7 @@ exports.signin = async (req, res) => {
     });
     return;
   }
-
+  // Select * from User where username = "username";
   await User.findOne({
     where: { username: username },
   })
@@ -68,7 +73,7 @@ exports.signin = async (req, res) => {
       if (!user) {
         return res.status(404).send({ message: "User not found." });
       }
-      const passwordIsValid = bcrypt.compareSync(password, user.UserPassword);
+      const passwordIsValid = bcrypt.compareSync(password, user.password);
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
@@ -79,15 +84,18 @@ exports.signin = async (req, res) => {
         expiresIn: 86400, // 24h
       });
 
-      //Select * From user_roles inner join users on user.id = user_roles.userId inner join roles on user_roles.roleId = roles.id
+      //Select * from user_roles
+      //inner join users on user.id = user_roles.Id inner
+      //join roles on user_roles.roleId =roles.id
+      //where user.'username'
       const authorities = [];
       user.getRoles().then((roles) => {
         for (let i = 0; i < roles.length; i++) {
-          authorities.push("ROLES_" + roles[i].roleName.toUppercase());
+          authorities.push("ROLES_" + roles[i].name.toUpperCase());
         }
         res.status(200).send({
           id: user.id,
-          username: user.name,
+          username: user.username,
           email: user.email,
           roles: authorities,
           accessToken: token,
