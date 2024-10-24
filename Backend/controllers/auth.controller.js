@@ -1,4 +1,4 @@
-const config = require("../config/auth.consfig");
+const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.User;
 const Role = db.Role;

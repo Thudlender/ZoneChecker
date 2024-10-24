@@ -11,6 +11,15 @@ const Map = sequelize.define("map", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  adminId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: "users",
+      key: "id",
+    },
+  },
+
   address: {  // ฟิลด์ address
     type: DataTypes.STRING,
     allowNull: false,

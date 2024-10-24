@@ -1,14 +1,14 @@
-import axios from "axios"; //
-import { useEffect, useState } from "react"; //
-const url = import.meta.env.VITE_URL; //
+import axios from "axios"; 
+import { useEffect, useState } from "react"; 
+const base_url = import.meta.env.VITE_URL; 
 import {
   MapContainer,
   TileLayer,
   Popup,
   Marker,
   useMapEvents,
-} from "react-leaflet"; //
-import "leaflet/dist/leaflet.css"; //
+} from "react-leaflet"; 
+import "leaflet/dist/leaflet.css"; 
 import { icon, Icon } from "leaflet";
 import "./App.css";
 import Swal from "sweetalert2";
@@ -22,6 +22,7 @@ function App() {
     lng: 100.04233271,
     radius: 1000,
   });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,6 +56,7 @@ function App() {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c; //Distance in meters
   };
+
   useEffect(() => {
     const fetchStore = async () => {
       try {
@@ -64,11 +66,25 @@ function App() {
           setStores(response.data);
         }
       } catch (error) {
-        console.log(error);
+        console.log("Error fetching stores:", error);
       }
     };
     fetchStore();
   }, []);
+
+   //ไอคอนบ้าน
+  const housingIcon = new Icon({
+    iconUrl:
+      "https://img.icons8.com/stencil/32/exterior.png",
+    iconSize: [32, 32], // ขนาดของไอคอน
+  });
+
+  //ไอคอนร้านค้า
+  const defaultIcon = new Icon({
+    iconUrl: "https://img.icons8.com/stencil/32/shop.png",   
+    iconSize: [32, 32], 
+  });
+
   const LocationMap = () => {
     useMapEvents({
       click(e) {
@@ -79,15 +95,21 @@ function App() {
     });
     return (
       <Marker position={[myLocation.lat, myLocation.lng]} icon={housingIcon}>
-        <Popup>My Current Location</Popup>
+        <Popup>
+          A pretty CSS3 popup. <br /> Easily customizable.
+        </Popup>
       </Marker>
     );
   };
-  const housingIcon = new Icon({
+
+  const selectedIcon = new Icon({
     iconUrl:
-      "https://cdn-icons-png.freepik.com/256/619/619153.png?semt=ais_hybrid",
-    iconSize: [38, 45], //size of the icon
+      "https://img.icons8.com/?size=100&id=21240&format=png&color=000000",
+    iconSize: [25, 26],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
   });
+  
   const handleGetLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       setMyLocation({
@@ -96,6 +118,51 @@ function App() {
       });
     });
   };
+
+  const handleAddStore = async () => {
+    if (myLocation.lat === "" || myLocation.lng === "") {
+      Swal.fire({
+        title: "Error!",
+        text: "Please select a valid location to add a store.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
+
+
+    const newStore = {
+      name: "New Store", // คุณสามารถปรับให้เป็นชื่อที่ต้องการ
+      address: "New Address", // ปรับให้เป็นที่อยู่ที่ต้องการ
+      lat: myLocation.lat,
+      lng: myLocation.lng,
+      direction: "New Direction", // ปรับให้เป็นลิงค์สำหรับการนำทาง
+    };
+
+    try {
+      const response = await (base_url + "/api/stores", newStore); //ยังไม่รู้ต้องแก้ยังไง
+      if (response.status === 201) {
+        Swal.fire({
+          icon: "success",
+          title: "Store Added",
+          text: "The store has been successfully added.",
+          confirmButtonText: "OK",
+        });
+        // Update the store list after adding a new store
+        setStores((prevStores) => [...prevStores, response.data]);
+      }
+    } catch (error) {
+      console.error("Error adding store:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "There was an error adding the store.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
   const handleLocationCheck = () => {
     if (myLocation.lat === "" || myLocation.lng === "") {
       Swal.fire({
@@ -106,7 +173,7 @@ function App() {
       });
       return;
     }
-    if (deliveryZone.lat === "" || deliveryZone.lng === "") {
+    if (!deliveryZone.lat === "" || !deliveryZone.lng === "") {
       Swal.fire({
         title: "Error!",
         text: "Please enter your valid Store location",
@@ -115,31 +182,55 @@ function App() {
       });
       return;
     }
+
     const distance = calculateDistance(
       myLocation.lat,
       myLocation.lng,
       deliveryZone.lat,
       deliveryZone.lng
     );
-    console.log(distance);
     if (distance <= deliveryZone.radius) {
       Swal.fire({
-        title: "Success",
-        text: "You are within the delivery zone.",
         icon: "success",
+        title: "success",
+        text: "You are within the delivery zone",
         confirmButtonText: "OK",
       });
-      //Suggestion nearby stores.....
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oh no!",
+        text: "You are outside of the delivery zone",
+        confirmButtonText: "OK",
+      });
     }
   };
+
   return (
     <>
       <div>
         <h1>Store Delivery Zone Checker</h1>
-        <button onClick={handleGetLocation}>Get My Location</button>
-        <button onClick={handleLocationCheck}>
-          Check Delivery Availability
+        <button 
+        className="btn btn-outline btn-success" 
+        onClick={handleGetLocation}>
+
+          Get My Location
+
         </button>
+        <button 
+        className="btn btn-outline btn-info" 
+        onClick={handleLocationCheck}>
+
+          Check Delivery Availability
+
+        </button>
+        <button 
+        className="btn btn-outline btn-warning" 
+        onClick={handleAddStore}>
+
+        Add Store at My Location
+
+      </button>
         <div>
           <MapContainer
             center={center}
@@ -151,16 +242,32 @@ function App() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[51.505, -0.09]} icon={housingIcon}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
+            
 
             {stores &&
               stores.map((store) => {
                 return (
-                  <Marker key={store.id} position={[store.lat, store.lng]}>
+                  <Marker 
+                  key={store.id} 
+                  position={[store.lat, store.lng]}
+                  icon={selectedStore === store.id ? selectedIcon : defaultIcon} // เปลี่ยนสีไอคอนตามร้านที่เลือก
+                  eventHandlers={{
+                    click: () => {
+                      setDeliveryZone({
+                        lat: store.lat,
+                        lng: store.lng,
+                        radius: 700, // สามารถปรับ radius ได้
+                      });
+                      setSelectedStore(store.id); // ตั้งค่าให้ร้านค้าที่ถูกเลือก
+                      Swal.fire({
+                        title: "Store Selected",
+                        text: `You have selected ${store.name} as your delivery zone.`,
+                        icon: "info",
+                        confirmButtonText: "OK",
+                      });
+                    },
+                  }}
+                  >
                     <Popup>
                       <b>{store.name}</b>
                       <p>{store.address}</p>
@@ -169,7 +276,7 @@ function App() {
                   </Marker>
                 );
               })}
-              <LocationMap/>
+              {myLocation.lat && myLocation.lng && <LocationMap/>}
           </MapContainer>
         </div>
       </div>

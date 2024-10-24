@@ -1,4 +1,4 @@
-const Map = require("../models/map.models");
+const Map = require("../models/Map.model");
 
 // Create and Save a new Map!
 exports.create = async (req, res) => {
