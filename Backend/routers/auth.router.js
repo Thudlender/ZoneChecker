@@ -6,13 +6,13 @@ const { verifySignUp} = require("../middleware");
 router.use((req, res, next) =>{
     res.header(
       "Access-Control-Allow-Headers",
-      "x-acces-token, origin, Content-Type, Accept"
+      "x-access-token, origin, Content-Type, Accept"
     );
     next();
 });
 router.post(
     "/signup",
-    [verifySignUp.checkDuplicateUsernameOrEmail, verifySignUp.checkRolesExisted],
+    // [verifySignUp.checkDuplicateUsernameOrEmail, verifySignUp.checkRolesExisted],
     authController.signup
 );
 

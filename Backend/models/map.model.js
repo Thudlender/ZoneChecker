@@ -13,7 +13,7 @@ const Map = sequelize.define("map", {
   },
   adminId: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
     references: {
       model: "users",
       key: "id",

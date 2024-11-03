@@ -8,22 +8,22 @@ const { Op } = require("sequelize");
 
 //Register a new user
 exports.signup = async (req, res) => {
-  const { username, email, password } = req.body;
-  if (!username || !email || !password) {
-    req.status(400).send({
-      message: "Please provid all required fields",
+  const { username, password, email} = req.body;
+  if (!username || !password || !email) {
+    res.status(400).send({
+      message: "กรุณากรอกข้อมูลให้ครบถ้วน",
     });
     return;
   }
 
-  //Prepare user data
+  // เตรียมข้อมูลผู้ใช้
   const newUser = {
     username: username,
-    email: email,
     password: bcrypt.hashSync(password, 8),
+    email: email,
   };
 
-  //Save user in the database
+  // บันทึกผู้ใช้ในฐานข้อมูล
   await User.create(newUser)
     .then((user) => {
       if (req.body.roles) {
@@ -34,24 +34,22 @@ exports.signup = async (req, res) => {
         }).then((roles) => {
           user.setRoles(roles).then(() => {
             res.send({
-              message: "User registered successfully!",
+              message: "ลงทะเบียนผู้ใช้สำเร็จ!",
             });
           });
         });
       } else {
-        //set defautl role to "user" id=1
+        // กำหนดบทบาทเริ่มต้นเป็น "user" โดย id=1
         user.setRoles([1]).then(() => {
           res.send({
-            message: "User registered successfully!",
+            message: "ลงทะเบียนผู้ใช้สำเร็จ!",
           });
         });
-      };
+      }
     })
     .catch((error) => {
       res.status(500).send({
-        message:
-          error.message ||
-          "Something error occured while registering a new user.",
+        message: error.message || "เกิดข้อผิดพลาดขณะลงทะเบียนผู้ใช้ใหม่",
       });
     });
 };

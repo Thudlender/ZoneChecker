@@ -1,3 +1,58 @@
+import { useEffect, useState } from "react";
+import AuthService from "../service/auth.service";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
+
+
+const Login = () => {
+  const [user, setUser] = useState({
+  username: "",
+  password: "",
+});
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setUser((user) => ({ ...user, [name]: value}));
+};
+
+const {login, user:loggedUser} = useAuthContext();
+useEffect(() => {
+  if (loggedUser) {
+    navigate("/");
+  }
+}, [loggedUser])
+
+const navigate = useNavigate();
+
+const handleSubmit = async () => {
+  try {
+      const currentUser = await AuthService.login(
+          user.username,
+          user.password
+      );
+      console.log(currentUser);
+      if (currentUser.status === 200) {
+          login(currentUser.data);
+          Swal.fire({
+              icon: "success",
+              title: "User login successfully",
+              text: "Login success now!",
+              timer: 2000,
+          });
+          setUser({ username: "", password: "" });
+          navigate("/");
+      }
+      
+  } catch (error) {
+      Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error?.response?.data?.message || error.message,
+          timer: 2000,
+      });
+  }
+};
 /*
   This example requires some changes to your config:
   
@@ -12,7 +67,6 @@
   }
   ```
 */
-export default function Example() {
     return (
       <>
         {/*
@@ -35,6 +89,21 @@ export default function Example() {
             </h2>
           </div>
   
+          <div className="mb-4">
+        <label for="name" className="block mb-2 text-sm font-medium">
+          Your username
+        </label>
+        <input
+          type="text"
+          id="name"
+          className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full py-2.5 px-4"
+          placeholder="Andrew Jackson"
+          required
+          name="username"
+          onChange={handleChange}
+        />
+      </div>
+
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form action="#" method="POST" className="space-y-6">
               <div>
@@ -49,6 +118,7 @@ export default function Example() {
                     required
                     autoComplete="email"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -58,11 +128,6 @@ export default function Example() {
                   <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                     Password
                   </label>
-                  <div className="text-sm">
-                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                      Forgot password?
-                    </a>
-                  </div>
                 </div>
                 <div className="mt-2">
                   <input
@@ -72,12 +137,14 @@ export default function Example() {
                     required
                     autoComplete="current-password"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleChange}
                   />
                 </div>
               </div>
   
               <div>
                 <button
+                  onClick={handleSubmit}
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
@@ -85,16 +152,10 @@ export default function Example() {
                 </button>
               </div>
             </form>
-  
-            <p className="mt-10 text-center text-sm text-gray-500">
-              Not a member?{' '}
-              <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                Start a 14 day free trial
-              </a>
-            </p>
           </div>
         </div>
       </>
-    )
-  }
-  
+    );
+};
+
+export default Login;

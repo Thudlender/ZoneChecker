@@ -2,10 +2,10 @@ const Map = require("../models/Map.model");
 
 // Create and Save a new Map!
 exports.create = async (req, res) => {
-  const { name, address, direction, lat, lng, radius} = req.body;
+  const { name, adminId, address, direction, lat, lng, radius} = req.body;
 
   // Validate Data
-  if (!name || !address || !direction || !lat || !lng || !radius) {
+  if (!name || !adminId || !address || !direction || !lat || !lng || !radius) {
     return res.status(400).send({
       message: "Name, Address, or Direction cannot be empty!",
     });
@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
     }
 
     // Create a Map
-    const newMap = { name, address, direction, lat, lng, radius };
+    const newMap = { name, adminId, address, direction, lat, lng, radius };
     const data = await Map.create(newMap);
     res.send(data);
   } catch (error) {

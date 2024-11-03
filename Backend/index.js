@@ -1,47 +1,61 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();
+require("dotenv").config(".env");
 const PORT = process.env.PORT || 5000;
 const map = require("./routers/Map");
 const authRouter = require("./routers/auth.router");
 const db = require("./models/");
-const role = db.Role;
+const role = db.Role
 const cors = require("cors");
 
 // List of stores
 const stores = require("./stores");
 
-// CORS
-app.use(cors());
-
-// Initialize roles
-const initRole = () => {
-    role.create({ id: 1, name: "user" });
-    role.create({ id: 2, name: "moderator" });
-    role.create({ id: 3, name: "admin" });
-};
 
 // Dev mode (drop and re-sync database)
-db.sequelize.sync({ force: false }).then(() => {
-    // initRole();
-    console.log("Drop and Sync DB");
-});
+//   db.sequelize.sync({ force: true }).then(() => {
+//   initRole();
+//   console.log("Drop and re-sync db.");
+// });
 
-// Homepage
-app.get("/", (req, res) => {
-    res.send("<h1>Welcome to API for Store Delivery Zone Checker</h1>");
-});
+// Initialize roles
+  const initRole = () => {
+    role.create({
+      id: 1,
+      name: "user",
+    });
+    role.create({
+      id: 2,
+      name: "moderator",
+    });
+    role.create({
+      id: 3,
+      name: "admin",
+    });
+  };
 
-// Use routers
-app.use("/api/v1/maps", map);
-app.use("/api/v1/auth", authRouter);
+// CORS Middleware
+app.use(cors({ origin: "http://localhost:5173" })); // อนุญาต CORS ให้กับ localhost:5173
+
+//use middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Get all stores
 app.get("/api/stores", (req, res) => {
     res.json(stores);
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log("Server running on port http://localhost:" + PORT);
-});
+  //use Router
+  app.use("/api/v1/maps", map);
+app.use("/api/v1/auth", authRouter);
+
+// Homepage
+  app.get("/", (req, res) => {
+    res.send("<h1>Hello Store derivery API</h1>");
+  });
+
+  // Start server
+  app.listen(PORT, () => {
+    console.log("Listenning to http://localhost/:" + PORT);
+  });
