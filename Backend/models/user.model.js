@@ -14,6 +14,18 @@ const User = sequelize.define("user", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  address: {  // ฟิลด์ address
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  lat: {  // ฟิลด์ direction
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  lng: {  // ฟิลด์ direction
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
 });
 
 
