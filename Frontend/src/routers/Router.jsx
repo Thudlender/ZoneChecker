@@ -43,6 +43,42 @@ const router = createBrowserRouter([
           </RegisterPotected>
           ),
       },
+      {
+        path: "add",
+        element: (
+          <AdminPage>
+            <AddLocation />
+          </AdminPage>
+        ),
+      },
+      {
+        path: "edit/:storeID",
+        element: (
+          <ModOrAdminPage>
+            <EditLocation />
+          </ModOrAdminPage>
+        ),
+      },
+      {
+        path: "not-allowed",
+        element: <NotAllowed />,
+      },
+      {
+        path: "userprofile",
+        element: <Userprofile />,
+      },
+      {
+        path: "editstore",
+        element: (
+          <ModOrAdminPage> 
+        <EditStore />
+          </ModOrAdminPage>
+      ),
+      },
+      {
+        path: "editmodal/:storeID",
+        element: <EditModal />,
+      }
     ]
     }
 ]);
